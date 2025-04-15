@@ -134,9 +134,32 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    #terminal-loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    #terminal-text {
+      white-space: pre-wrap;
+      padding: 2rem;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
+  <div id="terminal-loader">
+    <div id="terminal-text"></div>
+  </div>
+
   <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
 
   <header>
@@ -196,6 +219,37 @@
     document.querySelector('.theme-toggle').addEventListener('click', () => {
       const newTheme = document.documentElement.getAttribute('data-theme');
       localStorage.setItem('theme', newTheme);
+    });
+
+    const terminalLines = [
+      'Booting up system...\n',
+      'Authenticating...',
+      'Access granted.',
+      'Launching portfolio...'
+    ];
+
+    let index = 0;
+    const terminal = document.getElementById('terminal-text');
+
+    function typeLine(line, i = 0) {
+      if (i < line.length) {
+        terminal.textContent += line[i];
+        setTimeout(() => typeLine(line, i + 1), 50);
+      } else {
+        terminal.textContent += '\n';
+        index++;
+        if (index < terminalLines.length) {
+          setTimeout(() => typeLine(terminalLines[index]), 500);
+        } else {
+          setTimeout(() => {
+            document.getElementById('terminal-loader').style.display = 'none';
+          }, 1000);
+        }
+      }
+    }
+
+    window.addEventListener('load', () => {
+      typeLine(terminalLines[index]);
     });
   </script>
 </body>
