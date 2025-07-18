@@ -220,6 +220,7 @@ https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf2
     beacon.onerror = () => {
       showAdblockModal();
     };
+    document.head.appendChild(beacon);
 
     // Fallback: Display modal if script was blocked
     return false;
