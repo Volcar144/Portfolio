@@ -195,6 +195,53 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
+  <!-- AdBlock Detection Script -->
+<script src="/adutil.js"></script>
+<script>
+  // Bait Detection: Manual check
+  const baitDetected = () => {
+    const dummyDiv = document.getElementById('VifqOQjmrSIF');
+    if (!dummyDiv) return true;
+
+    // Check if bait image was loaded
+    const baitImg = new Image();
+    baitImg.src = '/banner_ad.jpg';
+    baitImg.onerror = () => {
+      showAdblockModal();
+    };
+
+    // Fallback: Display modal if script was blocked
+    return false;
+  };
+
+  function showAdblockModal() {
+    const modal = document.getElementById('adblock-modal');
+    if (modal) modal.style.display = 'flex';
+  }
+
+  // Trigger after load
+  window.addEventListener('load', () => {
+    // Bait CSS
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = '/advert.css';
+    css.onerror = () => showAdblockModal();
+    document.head.appendChild(css);
+
+    // Bait JS
+    const script = document.createElement('script');
+    script.src = '/ads.js';
+    script.onerror = () => showAdblockModal();
+    document.body.appendChild(script);
+
+    // Check div bait
+    setTimeout(() => {
+      if (baitDetected()) {
+        showAdblockModal();
+      }
+    }, 500);
+  });
+</script>
 </head>
 <body>
   <!-- Terminal Loader -->
@@ -202,19 +249,6 @@
 
   <!-- Theme Toggle -->
   <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
-
-  <!-- Google AdSense Ad -->
-  <aside id="ad-container">
-    <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
-      data-ad-slot="yyyyyyyyyy"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </aside>
 
   <!-- AdBlock Modal -->
   <div id="adblock-modal">
@@ -287,6 +321,11 @@
       document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
     }
 
+    if (!localStorage.getItem('theme')) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      }
+
     const terminalLines = [
       'Booting up system...\n',
       'Authenticating...',
@@ -314,23 +353,6 @@
 
     window.addEventListener('load', () => {
       typeLine(terminalLines[index]);
-    });
-
-    // Adblock Detection
-    window.addEventListener('load', () => {
-      if (typeof window.AdBlockDetector === 'function') {
-        const detector = new AdBlockDetector({
-          checkOnLoad: true,
-          loopCheckTime: 50,
-          loopMaxNumber: 5,
-          baitClass: 'pub_300x250',
-          debug: false
-        });
-
-        detector.onDetected(() => {
-          document.getElementById('adblock-modal').style.display = 'flex';
-        });
-      }
     });
   </script>
 </body>
