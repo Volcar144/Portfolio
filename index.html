@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-adsense-account" content="ca-pub-3345921941465770">
-  <title>ArchieM - Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Archie Mclellan's Java development and cybersecurity portfolio." />
+  <meta name="keywords" content="Java Developer, Minecraft Plugins, Cyber Security, Sysadmin" />
+  <meta name="author" content="Archie Mclellan" />
+  <title>ArchieM - Java Developer & Cybersecurity Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
+    /* Root + Theme Variables */
     :root {
       --bg: #0f172a;
       --bg-light: #1e293b;
@@ -15,7 +18,6 @@
       --muted: #94a3b8;
       --shadow: rgba(0, 0, 0, 0.15);
     }
-
     [data-theme="light"] {
       --bg: #f8fafc;
       --bg-light: #e2e8f0;
@@ -40,7 +42,6 @@
       max-width: 900px;
       margin: auto;
       line-height: 1.75;
-      transition: background-color 0.3s, color 0.3s;
     }
 
     header {
@@ -84,12 +85,6 @@
       border-radius: 1rem;
       margin-bottom: 1.5rem;
       box-shadow: 0 6px 12px var(--shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px var(--shadow);
     }
 
     a {
@@ -123,24 +118,13 @@
       cursor: pointer;
       font-weight: 600;
       box-shadow: 0 2px 6px var(--shadow);
-      transition: background-color 0.3s, color 0.3s;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    /* Terminal Loader */
     #terminal-loader {
       position: fixed;
       top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100vw; height: 100vh;
       background: black;
       color: #00ff00;
       font-family: monospace;
@@ -149,78 +133,159 @@
       justify-content: center;
       z-index: 9999;
     }
+
     #terminal-text {
       white-space: pre-wrap;
       padding: 2rem;
       font-size: 1rem;
     }
+
+    /* Right-side Ad */
+    #ad-container {
+      position: fixed;
+      right: 1rem;
+      top: 6rem;
+      width: 220px;
+      background-color: var(--bg-light);
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 6px 12px var(--shadow);
+      z-index: 1000;
+    }
+
+    @media (max-width: 1024px) {
+      #ad-container {
+        display: none;
+      }
+    }
+
+    /* Adblock Guilt Modal */
+    #adblock-modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+    }
+
+    #adblock-modal .modal-content {
+      background: var(--bg-light);
+      color: var(--text);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 6px 20px var(--shadow);
+      max-width: 480px;
+      text-align: center;
+    }
+
+    #adblock-modal button {
+      margin-top: 1.5rem;
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
-  <div id="terminal-loader">
-    <div id="terminal-text"></div>
-  </div>
+  <!-- Terminal Loader -->
+  <div id="terminal-loader"><div id="terminal-text"></div></div>
 
+  <!-- Theme Toggle -->
   <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
 
-  <header>
-    <h1>Archie Mclellan</h1>
-    <p>Java Developer • Cyber Security enthusiast  • Sysadmin</p>
-  </header>
+  <!-- Google AdSense Ad -->
+  <aside id="ad-container">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+      data-ad-slot="yyyyyyyyyy"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </aside>
 
-  <div class="section">
-    <h2>About Me</h2>
-    <p>
-      I’m a self-taught java developer and network admin, as well as a cyber security enthusiast passionate about building incrediable experiences in minecraft for others.
-      Always learning. Always improving.
-    </p>
-  </div>
-
-  <div class="section">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Join Message Plus</h3>
-      <p>A very simple minecraft plugin focused around changing the in-game join message</p>
-      <a href="https://modrinth.com/plugin/jmp">View Project</a>
+  <!-- AdBlock Modal -->
+  <div id="adblock-modal">
+    <div class="modal-content">
+      <h2>Hey there! 👋</h2>
+      <p>
+        We noticed you're using an ad blocker. That's totally okay — but just know that a lot of time and effort went into building this site.
+        <br /><br />
+        If you like the content, consider turning off your ad blocker. Ads help keep the lights on 💡.
+      </p>
+      <button onclick="document.getElementById('adblock-modal').style.display='none'">Got it, thanks!</button>
     </div>
-    <div class="project">
-      <h3>Create Plus</h3>
-      <p>A simple minecraft create modpack</p>
-      <a href="https://modrinth.com/modpack/cplus">View Project</a>
+  </div>
+
+  <!-- Page Content -->
+  <main>
+    <header>
+      <h1>Archie Mclellan</h1>
+      <p>Java Developer • Cyber Security Enthusiast • Sysadmin</p>
+    </header>
+
+    <div class="section">
+      <h2>About Me</h2>
+      <p>
+        I’m a self-taught Java developer, network admin, and cybersecurity enthusiast passionate about building incredible Minecraft experiences.
+      </p>
     </div>
-  </div>
 
-  <div class="section">
-    <h2>Downloads</h2>
-    <p>Here you can download assets or any public files I've shared.</p>
-    <ul>
-      <li><a href="https://modrinth.com/plugin/jmp" download>Download JMP on modrinth</a></li>
-    </ul>
-  </div>
+    <div class="section">
+      <h2>Projects</h2>
+      <div class="project">
+        <h3>Join Message Plus</h3>
+        <p>Customizes join messages in Minecraft.</p>
+        <a href="https://modrinth.com/plugin/jmp" target="_blank">View Project</a>
+      </div>
+      <div class="project">
+        <h3>Create Plus</h3>
+        <p>A modpack built for the Create mod.</p>
+        <a href="https://modrinth.com/modpack/cplus" target="_blank">View Project</a>
+      </div>
+    </div>
 
-  <div class="section">
-    <h2>Contact</h2>
-    <p>Feel free to <a href="mailto:contact@archiem.top">email me</a> or connect with me on <a href="#">Discord</a>.</p>
-  </div>
+    <div class="section">
+      <h2>Downloads</h2>
+      <ul>
+        <li><a href="https://modrinth.com/plugin/jmp" download>Download JMP on Modrinth</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Contact</h2>
+      <p>Email me at <a href="mailto:contact@archiem.top">contact@archiem.top</a> or via <a href="#">Discord</a>.</p>
+    </div>
+  </main>
 
   <footer>
     &copy; 2025 Archie Mclellan. Built with ❤️
   </footer>
 
+  <!-- Theme + Terminal + Adblock Logic -->
   <script>
     function toggleTheme() {
       const current = document.documentElement.getAttribute('data-theme');
-      document.documentElement.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
     }
 
     if (localStorage.getItem('theme')) {
       document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
     }
-
-    document.querySelector('.theme-toggle').addEventListener('click', () => {
-      const newTheme = document.documentElement.getAttribute('data-theme');
-      localStorage.setItem('theme', newTheme);
-    });
 
     const terminalLines = [
       'Booting up system...\n',
@@ -228,10 +293,8 @@
       'Access granted.',
       'Launching portfolio...'
     ];
-
     let index = 0;
     const terminal = document.getElementById('terminal-text');
-
     function typeLine(line, i = 0) {
       if (i < line.length) {
         terminal.textContent += line[i];
@@ -251,6 +314,23 @@
 
     window.addEventListener('load', () => {
       typeLine(terminalLines[index]);
+    });
+
+    // Adblock Detection
+    window.addEventListener('load', () => {
+      if (typeof window.AdBlockDetector === 'function') {
+        const detector = new AdBlockDetector({
+          checkOnLoad: true,
+          loopCheckTime: 50,
+          loopMaxNumber: 5,
+          baitClass: 'pub_300x250',
+          debug: false
+        });
+
+        detector.onDetected(() => {
+          document.getElementById('adblock-modal').style.display = 'flex';
+        });
+      }
     });
   </script>
 </body>
