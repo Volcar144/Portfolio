@@ -199,6 +199,8 @@
   </style>
   <!-- AdBlock Detection Script -->
 <script src="/adutil.js"></script>
+<script> src="
+https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
 <script>
   // Bait Detection: Manual check
   const baitDetected = () => {
@@ -209,6 +211,13 @@
     const baitImg = new Image();
     baitImg.src = '/banner_ad.jpg';
     baitImg.onerror = () => {
+      showAdblockModal();
+    };
+
+    const beacon = document.createElement("script");
+    beacon.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    beacon.async = true;
+    beacon.onerror = () => {
       showAdblockModal();
     };
 
